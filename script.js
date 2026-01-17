@@ -1,4 +1,3 @@
-
 const API = "https://script.google.com/macros/s/AKfycbwynBJ1cnI2qujT7jUtDJvnemsRY5DzNa1P5ouHJuJfJSoygeH9Ftrxnx4uJk_kzD7zTQ/exec";
 
 async function init(){
