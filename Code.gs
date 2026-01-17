@@ -1,27 +1,27 @@
 function doGet(e) {
   const ss = SpreadsheetApp.getActive();
 
- // ดึงประวัติการเคลื่อนไหว
-if (e.parameter.action === 'logs') {
-  const rows = ss.getSheetByName('LOGS')
-    .getDataRange()
-    .getValues()
-    .slice(1);
+  if (e.parameter.action === "logs") {
+    const rows = ss.getSheetByName("LOGS")
+      .getDataRange()
+      .getValues()
+      .slice(1);
 
-  const data = rows.reverse().map(r => ({
-    date: r[0],
-    item: r[1],
-    type: r[2],
-    qty: r[3],
-    name: r[4]
-  }));
+    const data = rows.reverse().map(r => ({
+      date: Utilities.formatDate(new Date(r[0]), "Asia/Bangkok", "yyyy-MM-dd HH:mm"),
+      item: r[1],
+      type: r[2],
+      qty: r[3],
+      name: r[4]
+    }));
 
-  return ContentService
-    .createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
+    return ContentService
+      .createTextOutput(JSON.stringify(data))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  return ContentService.createTextOutput("ok");
 }
-}
-
 
   if(e.parameter.action == 'excel'){
     return ss.getAs('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
